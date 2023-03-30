@@ -1,0 +1,22 @@
+.personalInfo{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    padding: 1.5em;
+    border-radius: 6px;
+}
+
+.profile-photo{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+.profile-photo > label {
+    color: #f02d3a;
+    font-family: 'Inter' , sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}

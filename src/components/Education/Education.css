@@ -1,0 +1,11 @@
+.edu{
+    font-family: 'Karla', sans-serif;
+    padding: 2em;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+}
+

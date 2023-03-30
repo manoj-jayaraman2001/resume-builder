@@ -1,0 +1,16 @@
+.templates{
+    width: 90%;
+    height: 100vh;
+    margin: 0 auto;
+    padding: 2em 3em;
+    font-family: 'Karla', sans-serif;
+}
+
+.templates > h1 {
+    font-size: 30px;
+}
+
+.templates > p {
+    font-size: 14px;
+    margin-top: 1em;
+}
