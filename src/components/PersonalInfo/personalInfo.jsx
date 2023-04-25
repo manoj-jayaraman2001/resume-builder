@@ -1,29 +1,58 @@
 import React from "react";
 import "./personalInfo.css";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../../App";
+import { personaldata } from "../../templateData";
+import { validate } from "../vadidationFunction";
+import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 const PersonalInfo = (props) => {
   const navigate = useNavigate();
-
   function goback() {
     navigate("/");
   }
-
+  const context = useContext(UserContext);
+  let perData = context.personaldata;
+  const [warningDisplay, setWarning] = useState('none')
   const styles = { display: "flex", gap: "1.5em" };
 
   function changeAvatar(event) {
-    const img = event.target.files[0]
-    let url = URL.createObjectURL(img)
-    props.updateProfilePic(url)
+    const img = event.target.files[0];
+    let url = URL.createObjectURL(img);
+    context.setData((value) => {
+      return { ...value, profilePic: url };
+    });
   }
+
+  function updatePersonalData(event) {
+    let element = event.target;
+    context.setData((value) => {
+      return { ...value, [element.id]: element.value };
+    });
+  }
+
+  function handleNext() {
+    if(validate(perData)){
+      props.changeTab(2)
+    }else{
+      setWarning('flex')
+      setTimeout(() => {
+        setWarning('none')
+      }, 2500);
+    }
+    
+  }
+
   return (
     <div className="personalInfo">
       <div className="profile-photo">
-        <Avatar src={props.personaldata.profilePic} sx={{ width: "100px", height: "100px" }} />
+        <Avatar
+          src={perData.profilePic}
+          sx={{ width: "100px", height: "100px" }}
+        />
         <input
           id="profilePic"
           type="file"
@@ -35,110 +64,105 @@ const PersonalInfo = (props) => {
       </div>
       <div style={styles}>
         <TextField
-          onChange={(e) => {
-            props.updatePersonalData(e);
-          }}
+          value={perData.firstName}
           size="small"
           label="First Name"
           id="firstName"
           variant="outlined"
-          value={props.personaldata.firstName}
+          onChange={(e) => updatePersonalData(e)}
         />
         <TextField
-          onChange={(e) => {
-            props.updatePersonalData(e);
-          }}
+          value={perData.lastName}
           size="small"
           label="Last Name"
           id="lastName"
           variant="outlined"
-          value={props.personaldata.lastName}
+          onChange={(e) => updatePersonalData(e)}
         />
       </div>
       <div style={styles}>
         <TextField
-          onChange={(e) => {
-            props.updatePersonalData(e);
-          }}
+          value={perData.email}
           size="small"
           label="Email"
           id="email"
           variant="outlined"
-          value={props.personaldata.email}
+          onChange={(e) => updatePersonalData(e)}
         />
         <TextField
-          onChange={(e) => {
-            props.updatePersonalData(e);
-          }}
           size="small"
           label="Mobile No"
           id="mobileNo"
           variant="outlined"
-          value={props.personaldata.mobileNo}
+          value={perData.mobileNo}
+          onChange={(e) => updatePersonalData(e)}
         />
       </div>
       <div>
         <TextField
-          onChange={(e) => {
-            props.updatePersonalData(e);
-          }}
           size="small"
           label="Address"
           id="address"
           variant="outlined"
           fullWidth
-          value={props.personaldata.address}
+          value={perData.address}
+          onChange={(e) => updatePersonalData(e)}
         />
       </div>
       <div style={styles}>
         <TextField
-          onChange={(e) => {
-            props.updatePersonalData(e);
-          }}
           size="small"
           label="City"
           id="city"
           variant="outlined"
-          value={props.personaldata.city}
+          value={perData.city}
+          onChange={(e) => updatePersonalData(e)}
         />
         <TextField
-          onChange={(e) => {
-            props.updatePersonalData(e);
-          }}
           size="small"
           label="State"
           id="state"
           variant="outlined"
-          value={props.personaldata.state}
+          value={perData.state}
+          onChange={(e) => updatePersonalData(e)}
         />
       </div>
-      <div>
+      <div style={styles}>
         <TextField
-          onChange={(e) => {
-            props.updatePersonalData(e);
-          }}
           size="small"
           label="Postal Code"
           id="postalCode"
           variant="outlined"
-          value={props.personaldata.postalCode}
+          value={perData.postalCode}
+          onChange={(e) => updatePersonalData(e)}
+        />
+        <TextField
+          size="small"
+          label="Professional Title"
+          id="professionalTitle"
+          variant="outlined"
+          value={perData.professionalTitle}
+          onChange={(e) => updatePersonalData(e)}
         />
       </div>
       <div>
         <TextField
-          onChange={(e) => {
-            props.updatePersonalData(e);
-          }}
           multiline
           rows={4}
-          label="Objective"
+          label="Summary"
           id="Objective"
           variant="outlined"
           fullWidth
-          value={props.personaldata.Objective}
+          value={perData.Objective}
+          onChange={(e) => updatePersonalData(e)}
         />
       </div>
+
       <div style={{ ...styles, marginLeft: "auto" }}>
+        <div style={{ display: warningDisplay, gap: 4, alignItems: 'center' }}>
+          <WarningAmberIcon sx={{ color: "red" }} />
+          <p style={{ color: "red" }}>All the fields are mandatory</p>
+        </div>
         <Button
           onClick={goback}
           sx={{ color: "#f02d3a", borderColor: "#f02d3a", fontWeight: "500" }}
@@ -147,7 +171,7 @@ const PersonalInfo = (props) => {
           Back
         </Button>
         <Button
-          onClick={() => props.changeTab(2)}
+          onClick={handleNext}
           sx={{ background: "#f02d3a" }}
           variant="contained"
         >

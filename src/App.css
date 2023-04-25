@@ -5,7 +5,7 @@
 .header{
   display: flex;
   align-items: center;
-  padding: 2% 6%;
+  padding: 1em 2em;
   justify-content: space-between;
   box-shadow: 0 2px 4px #00000066;
   background-color: white;
@@ -62,7 +62,7 @@
     padding: 1.5em;
     position: fixed;
     gap: 2em;
-    top: 55px;
+    top: 4em;
     right: -300px;
     width: 300px;
     height: 100vh;
@@ -78,5 +78,9 @@
 
 
 .current{
+  color:#f02d3a;
+}
+
+.isActive{
   color:#f02d3a;
 }

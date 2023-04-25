@@ -1,114 +1,54 @@
 import React from "react";
 import "./WorkExperience.css";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Button } from "@mui/material";
-import TextField from "@mui/material/TextField";
-
-function ExperienceComponent(props) {
-  const styles = { display: "flex", gap: "1.5em" };
-  return (
-    <div className="exp-comp">
-      <h4>{`Experience ${props.number}`}</h4>
-      <hr />
-      <div style={styles}>
-        <TextField
-          name={`${props.number}`}
-          label="Job Title"
-          variant="outlined"
-          id="jobTitle"
-          onChange={(e) => {
-            props.updateExp(e, "onChange", props.number);
-          }}
-        />
-        <TextField
-          name={`${props.number}`}
-          label="Organization Name"
-          variant="outlined"
-          id="companyName"
-          onChange={(e) => {
-            props.updateExp(e, "onChange", props.number);
-          }}
-          
-        />
-      </div>
-      <div style={{ display: "flex", gap: "1.5em" }}>
-      <TextField
-          name={`${props.number}`}
-          label="Start Year"
-          variant="outlined"
-          id="start"
-          onChange={(e) => {
-            props.updateExp(e, "onChange", props.number);
-          }}
-      
-        />
-        <TextField
-          name={`${props.number}`}
-          label="End Year"
-          variant="outlined"
-          id="end"
-          onChange={(e) => {
-            props.updateExp(e, "onChange", props.number);
-          }}
-         
-        />
-        
-      </div>
-      <div>
-        <TextField
-          name={`${props.number}`}
-          label="Key Responsibilities"
-          variant="outlined"
-          fullWidth
-          multiline
-          rows={3}
-          id="Role"
-          onChange={(e) => {
-            props.updateExp(e, "onChange", props.number);
-          }}
-          
-        />
-      </div>
-    </div>
-  );
-}
-
+import { UserContext } from "../../App";
+import { validateExp } from "../vadidationFunction";
+import ExperienceComponent from "./ExperienceComponent";
+import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 const WorkExperience = (props) => {
-  const [number, setNumber] = useState(1);
-  const jobTitle = props.workExp[number - 1].jobTitle
-  const [ExpArray, setExpArray] = useState([
-    <ExperienceComponent
-      key={number}
-      number={number}
-      updateExp={props.updateExp}
-      workExp = {props.workExp}
-      jobTitle = {jobTitle}
-    />,
-  ]);
+  const context = useContext(UserContext);
+  const workExp = context.workExp;
+  console.log(workExp);
+  const [number, setNumber] = useState(workExp.length);
+  const [warningDisplay, setWarning] = useState("none");
+  const ExpArray = workExp.map((value, Index) => {
+    return <ExperienceComponent key={Index} number={Index + 1} value={value} />;
+  });
+
   function addExperience() {
-    setExpArray((preValue) => [
-      ...preValue,
-      <ExperienceComponent
-        key={number + 1}
-        number={number + 1}
-        updateExp={props.updateExp}
-        workExp = {props.workExp}
-        jobTitle = {jobTitle}
-      />,
-    ]);
-    setNumber((value) => value + 1);
+    context.setExp((prevExp) => {
+      return [
+        ...prevExp,
+        {
+          id: prevExp.length + 1,
+          jobTitle: "",
+          companyName: "",
+          start: "",
+          end: "",
+          Role: [""],
+        },
+      ];
+    });
+  }
+  function handleNext() {
+    if (validateExp(workExp)) {
+      props.changeTab(3);
+    } else {
+      setWarning("flex");
+      setTimeout(() => {
+        setWarning("none");
+      }, 2500);
+    }
   }
   function removeExperience() {
-    setExpArray((preValue) => {
-      const temp = [...preValue];
-      temp.pop();
-      return temp;
+    context.setExp((prevExp) => {
+      let newExp = [...prevExp];
+      newExp.pop();
+      return newExp;
     });
-    setNumber((value) => value - 1);
   }
 
-
-  console.log(props.workExp)
   return (
     <div className="work-exp">
       <h1>Work Experience</h1>
@@ -122,14 +62,13 @@ const WorkExperience = (props) => {
           }}
           onClick={(event) => {
             addExperience();
-            props.updateExp(event, "add");
           }}
-          disabled={number < 3 ? false : true}
+          disabled={workExp.length < 3 ? false : true}
         >
           Add New
         </Button>
         <Button
-          disabled={number === 1 ? true : false}
+          disabled={workExp.length === 1 ? true : false}
           sx={{
             width: "fit-content",
             color: "#f02d3a",
@@ -138,7 +77,6 @@ const WorkExperience = (props) => {
           }}
           onClick={(event) => {
             removeExperience();
-            props.updateExp(event, "remove");
           }}
         >
           Remove
@@ -146,6 +84,10 @@ const WorkExperience = (props) => {
       </div>
       <hr />
       <div className="next-btn" style={{ marginLeft: "auto" }}>
+        <div style={{ display: warningDisplay, gap: 4, alignItems: "center" }}>
+          <WarningAmberIcon sx={{ color: "red" }} />
+          <p style={{ color: "red" }}>All the fields are mandatory</p>
+        </div>
         <Button
           variant="outlined"
           onClick={() => props.changeTab(1)}
@@ -158,7 +100,7 @@ const WorkExperience = (props) => {
           Go Back
         </Button>
         <Button
-          onClick={() => props.changeTab(3)}
+          onClick={handleNext}
           variant="contained"
           sx={{ backgroundColor: "#f02d3a", width: "fit-content" }}
         >

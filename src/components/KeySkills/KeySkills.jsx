@@ -1,70 +1,78 @@
 import React from "react";
 import "./keySkills.css";
-import { useState } from "react";
+import { useContext } from "react";
 import { TextField } from "@mui/material";
 import { Button } from "@mui/material";
-
-import {useNavigate } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../App";
+import { validate, validateExp, validateSkills} from "../vadidationFunction";
 
 const KeySkills = (props) => {
+  const navigate = useNavigate();
+  const context = useContext(UserContext);
+  const skills = context.skillArr;
+  console.log(skills)
+  const skillArray = skills.map((value, Index) => {
+    return (
+      <TextField
+        size="small"
+        key={Index}
+        value={value}
+        placeholder={`Skill ${Index + 1}`}
+        onChange={(e) => {
+          updateSkills(e, Index);
+        }}
+      />
+    );
+  });
 
-  const navigate = useNavigate() 
-
-  function handleClick(){
-    navigate('/Preview')
+  function setSessionData(){
+    sessionStorage.setItem('personaldata',JSON.stringify(context.personaldata))
+    sessionStorage.setItem('workExp',JSON.stringify(context.workExp))
+    sessionStorage.setItem('education',JSON.stringify(context.education))
+    sessionStorage.setItem('keySkills',JSON.stringify(context.skillArr))
   }
 
+  function handleClick() {
+    
+    if(!validate(context.personaldata)){
+      props.changeTab(1)
+      props.warn()
+    }else if(!validateExp(context.workExp)){
+      props.changeTab(2)
+      props.warn()
+    }else if(!validate(context.education)){
+      props.changeTab(3)
+      props.warn()
+    }else if(!validate(context.skillArr)){
+      props.warn()
+    }else{
+      setSessionData()
+      navigate("/Preview");
+    }
+   
+    
 
-
-
-
-
-
-  console.log(props.skillArr)
-  const [number, setNumber] = useState(2);
-  const [skillArray, setSkillArray] = useState([
-    <TextField
-      size="small"
-      key={1}
-      label={`Skill ${1}`}
-      id = {`0`}
-      value = {props.skillArr[0]}
-      onChange={(e) => props.updateSkills(e, "onchange")}
-    />,
-    <TextField
-      size="small"
-      key={2}
-      id = {"1"}
-      label={`Skill ${2}`}
-      value = {props.skillArr[1]}
-      onChange={(e) => props.updateSkills(e , "onchange")}
-    />,
-  ]);
+  }
 
   function addNew() {
-    setNumber((value) => value + 1);
-    setSkillArray((prevValue) => {
-      const newSkill = [
-        ...prevValue,
-        [
-          <TextField
-            size="small"
-            key={number + 1}
-            id={`${number}`}
-            label={`Skill ${number + 1}`}
-            onChange={(e) => props.updateSkills(e, "onchange")}
-          />,
-        ],
-      ];
-      return newSkill;
-    });
+    context.setSkills((prevValue) => {
+        return [...prevValue, ""]
+    })
   }
   function removeSkill() {
-    const newArr = [...skillArray];
-    newArr.pop();
-    setSkillArray(newArr);
-    setNumber((value) => value - 1);
+    context.setSkills((prevValue) => {
+      let newSkills =  [...prevValue]
+      newSkills.pop()
+      return newSkills
+  })
+  }
+  function updateSkills(event, Index) {
+    context.setSkills((prevValue) => {
+      let newSkills = [...prevValue]
+      newSkills[Index] = event.target.value
+      return newSkills
+    })
   }
 
   return (
@@ -76,15 +84,19 @@ const KeySkills = (props) => {
       <div style={{ display: "flex", gap: "1.5em", margin: "0 auto" }}>
         <Button
           sx={{ width: "fit-content" }}
-          onClick={(e) => {addNew(); props.updateSkills(e, "add")}}
-          disabled={number > 15 ? true : false}
+          onClick={(e) => {
+            addNew();
+          }}
+          disabled={skills.length > 12 ? true : false}
         >
           Add New
         </Button>
         <Button
-         onClick={(e) => {removeSkill(); props.updateSkills(e, "remove")}}
+          onClick={(e) => {
+            removeSkill();
+          }}
           sx={{ width: "fit-content", color: "#f02d3a" }}
-          disabled={number === 1 ? true : false}
+          disabled={skills.length === 1 ? true : false}
         >
           Remove
         </Button>
@@ -98,7 +110,11 @@ const KeySkills = (props) => {
         >
           Go Back
         </Button>
-        <Button variant="contained" sx={{ backgroundColor: "#f02d3a" }} onClick = {handleClick}>
+        <Button
+          variant="contained"
+          sx={{ backgroundColor: "#f02d3a" }}
+          onClick={handleClick}
+        >
           Next
         </Button>
       </div>

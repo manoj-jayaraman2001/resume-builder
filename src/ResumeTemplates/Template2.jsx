@@ -2,37 +2,39 @@ import React from "react";
 import { Document, Page, StyleSheet, Text, Font } from "@react-pdf/renderer";
 import { Image } from "@react-pdf/renderer";
 import raleway from "../assets/fonts/Raleway-Regular.ttf";
+import { ImageComponent } from "./Template1";
 Font.register({
   family: "raleway",
   src: raleway,
 });
 const styles = StyleSheet.create({
   header: {
-    paddingBottom: "15px",
+    padding: "13px",
+    backgroundColor: "#da1e37",
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
     gap: "20px",
     fontFamily: "raleway",
-    borderBottom: "6px solid #00b4d8",
   },
   name: {
-    color: "#00b4d8",
+    color: "white",
     fontSize: 24,
   },
   role: {
     fontSize: "13px",
+    color: "white",
   },
   contact: {
     marginLeft: "auto",
-    color: "#00b4d8",
+    color: "white",
     fontSize: 11,
     lineHeight: "1.3px",
   },
   page: {
-    padding: 10,
+    padding: 0,
     flexDirection: "column",
-    backgroundColor: "white",
+    backgroundColor: "#fff0f3",
     lineHeight: 1.5,
     fontFamily: "raleway",
   },
@@ -43,12 +45,13 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 12,
+    padding: 10,
     lineHeight: "1.5px",
     fontFamily: "raleway",
   },
   subtitle: {
     fontSize: 16,
-    color: "#00b4d8",
+    color: "#da1e37",
     margin: "5px 0",
   },
   years: {
@@ -65,7 +68,8 @@ const styles = StyleSheet.create({
   },
 });
 
-const Template1 = (props) => {
+const Template2 = (props) => {
+  console.log(props)
   const personaldata = props.personaldata;
   const workExp = props.workExp;
   const education = props.education;
@@ -95,7 +99,7 @@ const Template1 = (props) => {
           {Index + 1 + " "}. {value.jobTitle}, {value.companyName} -{" "}
           {value.start} to {value.end}
         </Text>
-        <Text style={{ fontSize: 15, color: "#00b4d8", marginTop: 7 }}>
+        <Text style={{ fontSize: 15, color: "#da1e37", marginTop: 7 }}>
           Key Roles:
         </Text>
         <div style={styles.res}>
@@ -113,22 +117,21 @@ const Template1 = (props) => {
       </div>
     );
   });
-
   return (
     <Document>
       <Page style={styles.page}>
         <div style={styles.header}>
           <ImageComponent
-            firstName={personaldata.firstName}
-            lastName={personaldata.lastName}
-            profilePic={personaldata.profilePic}
-            color = {'#00b4d8'}
-          />
+              firstName={personaldata.firstName}
+              lastName={personaldata.lastName}
+              profilePic={personaldata.profilePic}
+              color  = {'#da1e37'}
+            />
           <div>
             <Text
               style={styles.name}
             >{`${personaldata.firstName} ${personaldata.lastName}`}</Text>
-            <Text style={styles.role}>{personaldata.professionalTitle}</Text>
+            <Text style={styles.role}>Frontend Developer</Text>
           </div>
           <div style={styles.contact}>
             <Text>{personaldata.address}</Text>
@@ -138,31 +141,33 @@ const Template1 = (props) => {
             <Text>{personaldata.email}</Text>
           </div>
         </div>
-        <div
-          style={{ borderBottom: "6px solid #00b4d8", paddingBottom: "10px" }}
-        >
-          <Text style={styles.subtitle}>Summary:</Text>
-          <Text style={styles.text}>{personaldata.Objective}</Text>
-        </div>
-
-        <div style={{ borderBottom: "6px solid #00b4d8", padding: 10 }}>
-          <Text style={styles.subtitle}>Professional Experience:</Text>
-          <div style={styles.years}>{rolesArray}</div>
-        </div>
         <div>
-          <Text style={styles.subtitle}>Education: </Text>
-          <div style={{ borderBottom: "6px solid #00b4d8", paddingBottom: 7 }}>
-            <Text style={{ fontSize: 15 }}>
-              {education.university} - {education.startYear} to{" "}
-              {education.endYear}
-            </Text>
-            <Text style={{ fontSize: 12, marginTop: 5 }}>
-              {education.type}, {education.degree}
-            </Text>
+          <div style={{ padding: "10px" }}>
+            <Text style={styles.subtitle}>Summary:</Text>
+            <Text style={styles.text}>{personaldata.Objective}</Text>
+          </div>
+
+          <div style={{ backgroundColor: "#fae0e4", padding: 10 }}>
+            <Text style={styles.subtitle}>Professional Experience:</Text>
+            <div style={styles.years}>{rolesArray}</div>
           </div>
           <div>
-            <Text style={styles.subtitle}>Key Kills: </Text>
-            <Text style={{ fontSize: 12 }}>{keySkills.join(", ")},</Text>
+            <div style = {{padding: 10}}>
+              <Text style={styles.subtitle}>Education: </Text>
+              <div style={{ paddingBottom: 7 }}>
+                <Text style={{ fontSize: 15 }}>
+                  {education.university} - {education.startYear} to{" "}
+                  {education.endYear}
+                </Text>
+                <Text style={{ fontSize: 12, marginTop: 5 }}>
+                  {education.type}, {education.degree}
+                </Text>
+              </div>
+            </div>
+            <div style={{ backgroundColor: "#fae0e4", padding: 10 }}>
+              <Text style={styles.subtitle}>Key Kills: </Text>
+              <Text style={{ fontSize: 12 }}>{keySkills.join(", ")} .</Text>
+            </div>
           </div>
         </div>
       </Page>
@@ -170,34 +175,4 @@ const Template1 = (props) => {
   );
 };
 
-export const ImageComponent = (props) => {
-  const AvatarByName = () => {
-    return (
-      <div
-        style={{
-          backgroundColor: 'white',
-          borderRadius: '50%', 
-          borderColor: props.color,
-          padding: '14px',
-          fontSize: 38,
-          display: 'flex',
-          flexDirection:'row',
-          alignItems: 'center'
-        }}
-      >
-        <Text style={{marginTop: 10, color: props.color,}}>{`${props.firstName[0]}${props.lastName[0]}`}</Text>
-      </div>
-    );
-  };
-  return (
-    <>
-      {props.profilePic === "/broken-image.jpg" ? (
-        <AvatarByName />
-      ) : (
-        <Image src={props.profilePic} style={styles.avatar} />
-      )}
-    </>
-  );
-};
-
-export default Template1;
+export default Template2;

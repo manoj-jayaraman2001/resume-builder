@@ -1,5 +1,6 @@
 .updateDetials{
-    padding: 4em 4em;
+    position: relative;
+    padding: 2em 4em;
     display: flex;
     gap: 8em;
     flex-wrap: wrap;
@@ -64,4 +65,12 @@
     .tab:hover{
         color: #f02d3a;
     }
+}
+
+
+.arrow{
+    position: absolute; 
+    left: 1em;
+    top: 1em;
+    cursor: pointer;
 }

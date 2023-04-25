@@ -1,16 +1,40 @@
-.templates{
-    width: 90%;
-    height: 100vh;
-    margin: 0 auto;
-    padding: 2em 3em;
-    font-family: 'Karla', sans-serif;
+.templates {
+  width: 90%;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 2em 3em;
+  font-family: "Karla", sans-serif;
 }
 
 .templates > h1 {
-    font-size: 30px;
+  font-size: 30px;
 }
 
 .templates > p {
-    font-size: 14px;
-    margin-top: 1em;
+  font-size: 14px;
+  margin-top: 1em;
 }
+
+.resumeTemplates {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 250px);
+  column-gap: 2em;
+  row-gap: 2em;
+  margin-top: 2em ;
+}
+.previewComponent {
+  position: relative;
+  cursor: pointer;
+}
+
+.templateImage{
+  width: 250px;
+  height: 350px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+  cursor: pointer;
+  transition: transform 0.5s;
+}
+/* .templateImage:hover{
+
+ 
+} */

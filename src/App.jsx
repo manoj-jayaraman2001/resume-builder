@@ -7,7 +7,24 @@ import MyResumes from "./components/MyResumes/MyResume";
 import AboutUs from "./components/AboutUs/AboutUs";
 import UpdateDetials from "./components/updateDetials/UpdateDetials";
 import Preview from "./components/Preview/Preview";
+import { createContext } from "react";
+import { PersonalData, Experience, Edu, skills } from "./data";
+export const UserContext = createContext();
 function App() {
+  const [personaldata, setData] = useState(PersonalData);
+  const [workExp, setExp] = useState(Experience);
+  const [education, setEducation] = useState(Edu);
+  const [skillArr, setSkills] = useState(skills);
+  const value = {
+    personaldata,
+    workExp,
+    education,
+    skillArr,
+    setData,
+    setExp,
+    setEducation,
+    setSkills,
+  };
   return (
     <div className="App">
       <div>
@@ -15,11 +32,29 @@ function App() {
       </div>
       <div>
         <Routes>
-          <Route path="/" element={<Templates />} />
+          <Route path="/" element={<Templates/>} />
           <Route path="/myresumes" element={<MyResumes />} />
           <Route path="/aboutus" element={<AboutUs />} />
-          <Route path="/updateDetials" element={<UpdateDetials />} />
-          <Route path="/Preview" element={<Preview/>} />
+          <Route
+            path="/updateDetials"
+            element={
+              <UserContext.Provider value={{...value}}>
+                <UpdateDetials />
+              </UserContext.Provider>
+            }
+          />
+          <Route
+            path="/Preview"
+            element={
+              <UserContext.Provider
+                value={{
+                  ...value
+                }}
+              >
+                <Preview/>
+              </UserContext.Provider>
+            }
+          />
         </Routes>
       </div>
     </div>

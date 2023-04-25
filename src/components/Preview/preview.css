@@ -1,0 +1,36 @@
+.previewPage{
+    display: "flex";
+    margin: 1.5% auto;
+    gap: 50;
+    align-items: "center";
+    justify-content: "center";
+}
+.preview{
+    position: relative;
+    height: fit-content;
+    width: fit-content;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
+
+
+.downloadBox{
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    width: fit-content;
+    gap: 1em;
+    padding: 2em;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+    background-color: white;
+    border-radius: 8px;
+}
+
+.modal{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    z-index: 1700;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}

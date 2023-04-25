@@ -1,9 +1,33 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import "./Education.css";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
+import { UserContext } from "../../App";
+import { validate } from "../vadidationFunction";
+import WarningAmberIcon from "@mui/icons-material/WarningAmber";
+
+
 const Education = (props) => {
+  const context = useContext(UserContext);
+  const education = context.education;
+  const  [warningDisplay, setWarning] = useState('none')
   const style = { display: "flex", gap: "1.5em" };
+  function updateEducation(event) {
+    let element = event.target;
+    context.setEducation((prevValue) => {
+      return { ...prevValue, [element.id]: element.value };
+    });
+  }
+  function handleNext() {
+    if (validate(education)) {
+      props.changeTab(4);
+    } else {
+      setWarning('flex')
+      setTimeout(()=>{
+        setWarning('none')
+      }, 2500)
+    }
+  }
   return (
     <div className="edu">
       <h1>Education</h1>
@@ -13,8 +37,10 @@ const Education = (props) => {
           label="Type"
           id="type"
           variant="outlined"
-          value={props.education.type}
-          onChange={props.updateEducation}
+          value={education.type}
+          onChange={(e) => {
+            updateEducation(e);
+          }}
         />
       </div>
       <div style={style}>
@@ -23,16 +49,20 @@ const Education = (props) => {
           label="University"
           id="university"
           variant="outlined"
-          value={props.education.university}
-          onChange={props.updateEducation}
+          value={education.university}
+          onChange={(e) => {
+            updateEducation(e);
+          }}
         />
         <TextField
           size="small"
           label="Degree"
           id="degree"
           variant="outlined"
-          value={props.education.degree}
-          onChange={props.updateEducation}
+          value={education.degree}
+          onChange={(e) => {
+            updateEducation(e);
+          }}
         />
       </div>
       <div style={style}>
@@ -41,20 +71,28 @@ const Education = (props) => {
           label="Start Year"
           id="startYear"
           variant="outlined"
-          value={props.education.startYear}
-          onChange={props.updateEducation}
+          value={education.startYear}
+          onChange={(e) => {
+            updateEducation(e);
+          }}
         />
         <TextField
           size="small"
           label="End Year"
           id="endYear"
           variant="outlined"
-          value={props.education.endYear}
-          onChange={props.updateEducation}
+          value={education.endYear}
+          onChange={(e) => {
+            updateEducation(e);
+          }}
         />
       </div>
       <hr />
       <div style={{ ...style, marginLeft: "auto" }}>
+        <div style={{ display: warningDisplay, gap: 4, alignItems: "center" }}>
+          <WarningAmberIcon sx={{ color: "red" }} />
+          <p style={{ color: "red" }}>All the fields are mandatory</p>
+        </div>
         <Button
           sx={{ color: "#f02d3a", borderColor: "#f02d3a" }}
           variant="outlined"
@@ -65,7 +103,7 @@ const Education = (props) => {
         <Button
           sx={{ backgroundColor: "#f02d3a" }}
           variant="contained"
-          onClick={() => props.changeTab(4)}
+          onClick={handleNext}
         >
           Next
         </Button>
