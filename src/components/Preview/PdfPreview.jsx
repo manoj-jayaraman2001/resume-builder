@@ -8,8 +8,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import "./preview.css";
 import {pdfjs} from "react-pdf";
-import path from 'path';
-import fs from 'fs';
 
 
 

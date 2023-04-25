@@ -1,12 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import "../App.css";
-import { Link, useLocation } from "react-router-dom";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [mobileClicked, setMobileClicked] = useState(false);
-  let location = useLocation();
+  
   function handleClick() {
     setMobileClicked((value) => !value);
   }

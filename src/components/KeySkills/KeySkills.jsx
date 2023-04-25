@@ -5,7 +5,7 @@ import { TextField } from "@mui/material";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../App";
-import { validate, validateExp, validateSkills} from "../vadidationFunction";
+import { validate, validateExp} from "../vadidationFunction";
 
 const KeySkills = (props) => {
   const navigate = useNavigate();

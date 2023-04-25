@@ -1,6 +1,6 @@
 import React from "react";
 import "./WorkExperience.css";
-import { useState, useContext } from "react";
+import {useContext } from "react";
 import TextField from "@mui/material/TextField";
 import { UserContext } from "../../App";
 import Input from "@mui/material/Input";

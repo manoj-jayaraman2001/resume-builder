@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import { useState, useContext } from "react";
 import { UserContext } from "../../App";
-import { personaldata } from "../../templateData";
 import { validate } from "../vadidationFunction";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 const PersonalInfo = (props) => {

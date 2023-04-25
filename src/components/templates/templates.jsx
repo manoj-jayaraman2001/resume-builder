@@ -2,7 +2,7 @@ import React from "react";
 import "./templates.css";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Images from "./images";
 
 const TemplatePreview =(props)=>{

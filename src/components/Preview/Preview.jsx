@@ -1,5 +1,4 @@
 import PdfPreview from "./PdfPreview";
-import Template2 from "../../ResumeTemplates/Template2";
 import { UserContext } from "../../App";
 import { useState, useContext, useMemo } from "react";
 import { save } from "../indexedDB";
@@ -8,7 +7,6 @@ import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { PDFDownloadLink, BlobProvider } from "@react-pdf/renderer";
 import Modal from "./Modal";
-import SelectTemplates from "./SelectTemplates";
 const Preview = (props) => {
   const context = useContext(UserContext);
 

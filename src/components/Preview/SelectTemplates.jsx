@@ -1,5 +1,4 @@
 import Images from "../templates/images";
-import * as Resume from "../../index";
 const SelectTemplates = (props) => {
   const SelectTemplate = {
     padding: "1em",
