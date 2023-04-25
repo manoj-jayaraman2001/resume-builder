@@ -59,8 +59,9 @@ const TemplatePreview =(props)=>{
 const Templates = (props) => {
  
   const imgArray = Images()
+  console.log(imgArray)
   const templates = imgArray.map((url, Index)=> {
-    return (<TemplatePreview key={Index} Index = {Index} url = {url} setTemplate = {props.setTemplate}/>)
+    return (<TemplatePreview key={Index} Index = {Index} url = {url.path} setTemplate = {props.setTemplate}/>)
   })
 
   

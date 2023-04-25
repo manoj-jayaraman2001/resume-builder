@@ -1,14 +1,18 @@
 
 
-const Images = () => {
-   
+function Images() {
+  const imagePaths = [];
+  Object.values(
+    import.meta.glob("../../assets/templateImages/*.png", { eager: true })
+  ).forEach(({ default: path }) => {
+    const url = new URL(path, import.meta.url);
+    const data = {
+      path: url.pathname,
+    };
+    imagePaths.push(data);
+  });
 
- 
-    const modules = import.meta.glob('../../../public/templateImages/*.png', { eager: true })
-    const images = Object.keys(modules)
-    
-   
-    return (images);
+  return imagePaths
 }
+export default Images
  
-export default Images;

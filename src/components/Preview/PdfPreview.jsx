@@ -3,13 +3,20 @@ import { useState, useEffect } from "react";
 import "react-pdf/dist/esm/Page/TextLayer.css";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import { usePDF } from "@react-pdf/renderer";
-import { Document, Page, pdfjs } from "react-pdf";
+import { Document, Page } from 'react-pdf'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import "./preview.css";
-import * as Resume from "../../index";
+import {pdfjs} from "react-pdf";
+import path from 'path';
+import fs from 'fs';
+
+
+
 const PdfPreview = (props) => {
-  pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+
+  
+  pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
   const [Instance, update] = usePDF({
     document: props.Template,
   });

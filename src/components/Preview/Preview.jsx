@@ -19,14 +19,16 @@ const Preview = (props) => {
 
   // passing template key to get complete selected template
 
-  const [localState, setlocalState] = useState(`Template${sessionStorage.getItem("selectedTemplate")}`)
-  const FinalTemplate = Resume[localState]
+  const [localState, setlocalState] = useState(
+    `Template${sessionStorage.getItem("selectedTemplate")}`
+  );
+  const FinalTemplate = Resume[localState];
   // getting Resume Data for PDF from session storage
   const personaldata = JSON.parse(sessionStorage.getItem("personaldata"));
   const workExp = JSON.parse(sessionStorage.getItem("workExp"));
   const education = JSON.parse(sessionStorage.getItem("education"));
   const keySkills = JSON.parse(sessionStorage.getItem("keySkills"));
-  
+
   const memoizedTemplate = (
     <FinalTemplate
       personaldata={personaldata}
@@ -48,10 +50,20 @@ const Preview = (props) => {
         flexWrap: "wrap",
       }}
     >
-      <div>
-        {/* <SelectTemplates setTemplate={setlocalState} /> */}
+      <div>{/* <SelectTemplates setTemplate={setlocalState} /> */}</div>
+      <div className="preview">
+        <PdfPreview
+          Template={
+            <FinalTemplate
+              personaldata={personaldata}
+              workExp={workExp}
+              education={education}
+              keySkills={keySkills}
+            />
+          }
+          width={400}
+        />
       </div>
-      <div className="preview"><PdfPreview Template={memoizedTemplate} width = {400}/></div>
       <div className="downloadBox">
         <DownloadBox selectedTemplate={memoizedTemplate} />
       </div>
