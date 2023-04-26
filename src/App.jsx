@@ -33,10 +33,10 @@ function App() {
       <div>
         <Routes>
           <Route index path="/" element={<Templates/>} />
-          <Route path="/myresumes" element={<MyResumes />} />
-          <Route path="/aboutus" element={<AboutUs />} />
+          <Route path="myresumes" element={<MyResumes />} />
+          <Route path="aboutus" element={<AboutUs />} />
           <Route
-            path="/updateDetials"
+            path="updateDetials"
             element={
               <UserContext.Provider value={{...value}}>
                 <UpdateDetials />
@@ -44,7 +44,7 @@ function App() {
             }
           />
           <Route
-            path="/Preview"
+            path="Preview"
             element={
               <UserContext.Provider
                 value={{
