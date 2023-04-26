@@ -44,7 +44,7 @@ function App() {
             }
           />
           <Route
-            path="Preview"
+            path="preview"
             element={
               <UserContext.Provider
                 value={{

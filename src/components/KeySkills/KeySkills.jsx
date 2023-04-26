@@ -48,7 +48,7 @@ const KeySkills = (props) => {
       props.warn()
     }else{
       setSessionData()
-      navigate("/Preview");
+      navigate("/preview");
     }
    
     
