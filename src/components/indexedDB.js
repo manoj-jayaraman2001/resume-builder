@@ -58,7 +58,11 @@ export function getResumes() {
     dbRequest.onsuccess = () => {
       const db = dbRequest.result;
       const transaction = db.transaction('pdfs', "readonly");
+      try{
       const store = transaction.objectStore('pdfs');
+      }catch{
+        const request = indexedDB.deleteDatabase(dbName);
+      }
       const getAllRequest = store.getAll();
       getAllRequest.onerror = () => {
         reject(new Error("Failed to retrieve data from store"));
