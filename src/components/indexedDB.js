@@ -5,12 +5,15 @@ export function save(pdfBlob, filename) {
   console.log(pdfBlob);
   const openRequest = indexedDB.open("mydatabase", 1);
 
+
   openRequest.onupgradeneeded = function (event) {
     const db = event.target.result;
     const objectStore = db.createObjectStore("pdfs", { keyPath: "id" });
-  };
+    
+  }
 
   openRequest.onsuccess = function (event) {
+    
     const db = event.target.result;
     const objectStore = db.transaction("pdfs", "readwrite").objectStore("pdfs");
 

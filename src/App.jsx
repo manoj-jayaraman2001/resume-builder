@@ -32,7 +32,7 @@ function App() {
       </div>
       <div>
         <Routes>
-          <Route path="/" element={<Templates/>} />
+          <Route index path="/" element={<Templates/>} />
           <Route path="/myresumes" element={<MyResumes />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route
