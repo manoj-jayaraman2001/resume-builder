@@ -43,6 +43,8 @@ export function save(pdfBlob, filename) {
     const request = objectStore.put(pdfObject);
     request.onsuccess = function (event) {
       console.log("PDF added to store");
+
+      db.close()
     };
   };
 }
@@ -64,6 +66,8 @@ export function getResumes() {
       getAllRequest.onsuccess = () => {
         resolve(getAllRequest.result);
       };
+
+      db.close()
     };
   });
 }
@@ -78,6 +82,7 @@ export function removeResume(filename) {
 
     deleteRequest.onsuccess = (event) => {
       console.log("Record deleted successfully");
+      db.close()
     };
     deleteRequest.onerror = (event) => {
       console.log("Error deleting record");
