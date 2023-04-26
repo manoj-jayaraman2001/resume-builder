@@ -102,7 +102,14 @@ const MyResumes = () => {
   console.log(ResumeData);
   useEffect(() => {
     getResumes().then((data) => {
-      setData(data);
+      if (data.length === 0){
+        const request = indexedDB.deleteDatabase(dbName);
+        request.onsuccess = () => {
+          setData(data)
+        };
+      }else{
+        setData(data)
+      }
     });
   }, []);
 
