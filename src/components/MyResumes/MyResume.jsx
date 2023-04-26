@@ -101,9 +101,15 @@ const MyResumes = () => {
   const [ResumeData, setData] = useState(null);
   console.log(ResumeData);
   useEffect(() => {
-    getResumes().then((data) => {
-      setData(data);
-    });
+    window.indexedDB.databases().then(databases => {
+      if (databases.length !== 0){
+        getResumes().then((data) => {
+          setData(data);
+        });
+      }
+    })
+
+    
   }, []);
 
   const ResumeDataState = () => {
