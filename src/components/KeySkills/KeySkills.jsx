@@ -11,7 +11,6 @@ const KeySkills = (props) => {
   const navigate = useNavigate();
   const context = useContext(UserContext);
   const skills = context.skillArr;
-  console.log(skills)
   const skillArray = skills.map((value, Index) => {
     return (
       <TextField

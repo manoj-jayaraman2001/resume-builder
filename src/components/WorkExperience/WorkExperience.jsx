@@ -9,7 +9,6 @@ import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 const WorkExperience = (props) => {
   const context = useContext(UserContext);
   const workExp = context.workExp;
-  console.log(workExp);
   const [number, setNumber] = useState(workExp.length);
   const [warningDisplay, setWarning] = useState("none");
   const ExpArray = workExp.map((value, Index) => {

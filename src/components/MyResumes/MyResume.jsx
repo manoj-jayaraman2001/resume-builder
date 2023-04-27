@@ -99,7 +99,6 @@ const ResumePreview = (props) => {
 
 const MyResumes = () => {
   const [ResumeData, setData] = useState(null);
-  console.log(ResumeData);
   useEffect(() => {
     window.indexedDB.databases().then(databases => {
       if (databases.length !== 0){

@@ -2,7 +2,6 @@ const databaseName = "mydatabase";
 const objectStoreName = "pdfs";
 const dbVersion = 1;
 export function save(pdfBlob, filename) {
-  console.log(pdfBlob);
   const openRequest = indexedDB.open("mydatabase", 1);
 
 
@@ -34,7 +33,6 @@ export function save(pdfBlob, filename) {
     ];
     const month = monthNames[date.getMonth()];
     const timeCreated = `${month} ${date.getDate()}, ${date.getHours()}:${date.getMinutes()}`;
-    console.log(date);
     const pdfObject = {
       id: filename,
       blob: pdfBlob,
@@ -42,7 +40,6 @@ export function save(pdfBlob, filename) {
     };
     const request = objectStore.put(pdfObject);
     request.onsuccess = function (event) {
-      console.log("PDF added to store");
 
       db.close()
     };
@@ -82,11 +79,10 @@ export function removeResume(filename) {
     const deleteRequest = objectStore.delete(filename);
 
     deleteRequest.onsuccess = (event) => {
-      console.log("Record deleted successfully");
       db.close()
     };
     deleteRequest.onerror = (event) => {
-      console.log("Error deleting record");
+      console.log("Something went wrong!!!")
     };
   };
 }

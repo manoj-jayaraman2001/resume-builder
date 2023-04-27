@@ -69,7 +69,6 @@ const styles = StyleSheet.create({
 });
 
 const Template2 = (props) => {
-  console.log(props)
   const personaldata = props.personaldata;
   const workExp = props.workExp;
   const education = props.education;
