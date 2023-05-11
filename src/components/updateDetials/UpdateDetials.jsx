@@ -46,9 +46,6 @@ function UpdateDetails() {
   return (
     <div className="updateDetials">
       <div>
-        <div className="arrow" onClick={goBack}>
-          <ArrowBackIcon sx={{ fontSize: 40, color: "#f02d3a" }} />
-        </div>
         <div className="tabs">
           <div
             onClick={() => changeTab(1)}

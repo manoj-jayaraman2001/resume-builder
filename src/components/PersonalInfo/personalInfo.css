@@ -20,3 +20,9 @@
     font-weight: 600;
     cursor: pointer;
 }
+
+@media (max-width: 548px){
+    .personalInfo{
+        width: 100%;
+    }
+}

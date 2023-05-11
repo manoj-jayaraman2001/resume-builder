@@ -1,8 +1,9 @@
 .updateDetials{
     position: relative;
     padding: 2em 4em;
+    justify-content: center;
     display: flex;
-    gap: 8em;
+    gap: 5em;
     flex-wrap: wrap;
 }
 
@@ -15,10 +16,11 @@
     height: fit-content;
 }
 .tab{
-    padding: 20px 40px;
-    width: 220px;
+    padding: 1em 2em;
+    width: 14em;
     background-color: white;
     cursor: pointer;
+    font-size: 1em;
     border-bottom: 1px solid #f0efeb;
 }
 
@@ -32,13 +34,13 @@
     font-weight: 700;
 }
 
-@media (max-width: 769px){
+@media (max-width: 768px){
     .updateDetials{
-        gap: 3em;
+        gap: 1.5em;
     }
 }
 
-@media( max-width: 768px) {
+@media( max-width: 912px) {
 
     .updateDetials{
         gap: 3em;
@@ -46,15 +48,16 @@
 
     .tabs{
         flex-direction: row;
-        font-size: 2.8vw;
+        font-size: 15px;
         box-shadow: none;
-        gap: 1em;
+        box-shadow: 0 2px 4px black;
     }
     .tab{
-        background-color: transparent;
-        padding: 0;
-        border-left: #f0efeb ;
+        background-color: white;
+        padding: 0.5em;
+        border-right: 2px solid lightgray ;
         width: fit-content;
+       
     }
     .activeTab{
         color: #f02d3a;
@@ -68,9 +71,16 @@
 }
 
 
-.arrow{
-    position: absolute; 
-    left: 1em;
-    top: 1em;
-    cursor: pointer;
+@media (max-width: 548px){
+    .tab{
+        font-size: 13px;
+    }
+    .updateDetials{
+        padding: 1.5em;
+    }
+}
+@media (max-width: 420px){
+    .tab{
+        font-size: 11.5px;
+    }
 }
