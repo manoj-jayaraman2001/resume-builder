@@ -14,11 +14,13 @@ const Education = (props) => {
   const style = { display: "flex", gap: "1.5em" };
   function updateEducation(event) {
     let element = event.target;
+
     context.setEducation((prevValue) => {
       return { ...prevValue, [element.id]: element.value };
     });
   }
   function handleNext() {
+    // using validation function to make sure form fields are not empty
     if (validate(education)) {
       props.changeTab(4);
     } else {

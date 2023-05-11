@@ -1,4 +1,7 @@
 
+//  Validation Functions For Froms
+
+
 
 export function validate(data){
     let hasEmpty = false

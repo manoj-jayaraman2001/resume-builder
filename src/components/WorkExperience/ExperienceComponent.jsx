@@ -48,6 +48,8 @@ function ExperienceComponent(props) {
     });
   }
 
+  //  functions for adding and removing roles
+
   function addRole() {
     if (roles.length < 4) {
       roles.push("");

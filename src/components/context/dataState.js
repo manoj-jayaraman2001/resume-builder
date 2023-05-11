@@ -1,5 +1,7 @@
 
 export const reducers = {
+
+  // Reducer or setters for updating state variables for personalInfo
   updateProfilePic: function (url) {
     setData((value) => ({ ...value, profilePic: url }));
   },
@@ -10,6 +12,7 @@ export const reducers = {
     });
   },
 
+    // Reducers for Work Experience
   updateExp: function (event, action, number) {
     let element = event.target;
     if (action === "add") {
@@ -26,12 +29,13 @@ export const reducers = {
           },
         ];
       });
-    } else if (action === "onChange") {
+    } else if (action === "onChange") {  
       setExp((value) => {
         let expArr = [...value];
         expArr[number - 1][element.id] = element.value;
         return expArr;
       });
+      // Removing Experience Component
     } else if (action === "remove") {
       setExp((value) => {
         let expArr = [...value];
@@ -47,7 +51,7 @@ export const reducers = {
       return { ...value, [element.id]: element.value };
     });
   },
-
+  //  Reducers for KeySkillls Component, managing state of Skill Array
   updateSkills: function (event, action) {
     if (action === "onchange") {
       setSkills((value) => {

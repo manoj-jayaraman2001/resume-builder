@@ -4,6 +4,7 @@ const dbVersion = 1;
 export function save(pdfBlob, filename) {
   const openRequest = indexedDB.open("mydatabase", 1);
 
+  // stroing blobs in indexedDB database
 
   openRequest.onupgradeneeded = function (event) {
     const db = event.target.result;
@@ -17,6 +18,7 @@ export function save(pdfBlob, filename) {
     const objectStore = db.transaction("pdfs", "readwrite").objectStore("pdfs");
 
     const date = new Date();
+    // for exact time when resume is saved.
     const monthNames = [
       "January",
       "February",
@@ -45,7 +47,7 @@ export function save(pdfBlob, filename) {
     };
   };
 }
-
+//  function to get all the resume,to using to display all resumes.
 export function getResumes() {
   return new Promise((resolve, reject) => {
     const dbRequest = indexedDB.open("mydatabase");
@@ -70,7 +72,7 @@ export function getResumes() {
   });
 }
 
-
+// function to delete a resume by filename
 export function removeResume(filename) {
   const openRequest = indexedDB.open("mydatabase", 1);
   openRequest.onsuccess = function (event) {

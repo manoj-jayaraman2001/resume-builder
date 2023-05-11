@@ -74,7 +74,7 @@ const DownloadBox = (props) => {
   const [modal, setOpen] = useState("none");
 
   function handleModal() {
-    setOpen("flex");
+    setOpen("block");
     setTimeout(() => {
       setOpen("none");
     }, 2000);
