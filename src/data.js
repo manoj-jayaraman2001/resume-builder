@@ -1,3 +1,7 @@
+
+
+// Initial data for all forms.
+
 export const PersonalData = {
   profilePic: "/broken-image.jpg",
   firstName: "",

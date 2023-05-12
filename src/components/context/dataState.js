@@ -1,6 +1,9 @@
 
 export const reducers = {
 
+
+
+
   // Reducer or setters for updating state variables for personalInfo
   updateProfilePic: function (url) {
     setData((value) => ({ ...value, profilePic: url }));
@@ -11,6 +14,10 @@ export const reducers = {
       return { ...value, [element.id]: element.value };
     });
   },
+
+
+
+
 
     // Reducers for Work Experience
   updateExp: function (event, action, number) {
@@ -45,6 +52,7 @@ export const reducers = {
     }
   },
 
+  //  Setter for Education
   updateEducation: function (event) {
     let element = event.target;
     setEducation((value) => {

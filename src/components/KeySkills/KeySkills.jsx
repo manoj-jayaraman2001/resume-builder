@@ -26,6 +26,7 @@ const KeySkills = (props) => {
   });
 
   function setSessionData(){
+    // on clicking next saving resume data on session storage.
     sessionStorage.setItem('personaldata',JSON.stringify(context.personaldata))
     sessionStorage.setItem('workExp',JSON.stringify(context.workExp))
     sessionStorage.setItem('education',JSON.stringify(context.education))

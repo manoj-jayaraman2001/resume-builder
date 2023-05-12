@@ -32,29 +32,19 @@ function App() {
       </div>
       <div>
         <Routes>
-          <Route index path="/" element={<Templates/>} />
+          <Route index path="/" element={<Templates />} />
           <Route path="myresumes" element={<MyResumes />} />
           <Route path="aboutus" element={<AboutUs />} />
+          {/* having a global context to all the forms */}
           <Route
             path="updateDetials"
             element={
-              <UserContext.Provider value={{...value}}>
+              <UserContext.Provider value={{ ...value }}>
                 <UpdateDetials />
               </UserContext.Provider>
             }
           />
-          <Route
-            path="preview"
-            element={
-              <UserContext.Provider
-                value={{
-                  ...value
-                }}
-              >
-                <Preview/>
-              </UserContext.Provider>
-            }
-          />
+          <Route path="preview" element={<Preview />} />
         </Routes>
       </div>
     </div>

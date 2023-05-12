@@ -1,5 +1,5 @@
 import Pic from "../src/assets/emoji.png";
-
+//  default data for templates in Templates showcase page.
 export const personaldata = {
   profilePic: Pic,
   firstName: "Manoj",

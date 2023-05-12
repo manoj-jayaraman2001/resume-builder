@@ -11,14 +11,20 @@ import { WarningAmberOutlined } from "@mui/icons-material";
 function UpdateDetails() {
   const [state, setState] = useState(1);
   const [warnDisplay, setWarn] = useState("none");
+
+
   const navigate = useNavigate();
   function goBack() {
     navigate("/");
   }
+
+  
   function changeTab(Index) {
     setState(Index);
   }
 
+
+//  conditionally rendering forms based on state
   const component = () => {
     if (state === 1) return <PersonalInfo changeTab={changeTab} warn={warn} />;
     if (state === 2)
@@ -35,6 +41,7 @@ function UpdateDetails() {
   useEffect(() => {
     window.addEventListener("beforeunload", alertUser);
     return () => {
+      // cleanup
       window.removeEventListener("beforeunload", alertUser);
     };
   }, []);
